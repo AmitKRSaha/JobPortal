@@ -56,7 +56,7 @@ export class JobShellComponent implements OnInit, OnDestroy {
       this.opensection.interview = 'closed';
   }
 
-  getShortListedCandidate(value: string) {
+  getShortListedCandidate(value: number) {
     this.jobService.getShortListedCandidate(value).subscribe(data => {
       // console.log('From get candidate method' + data);
       if (data.length > 0) {
@@ -71,7 +71,7 @@ export class JobShellComponent implements OnInit, OnDestroy {
 
   }
 
-  getCandidateInterviewDetails(value: string) {
+  getCandidateInterviewDetails(value: number) {
     this.jobService.getInterviewDetails(value).subscribe(data => {
       // console.log('From get interview method' + data);
       if (data.length > 0) {

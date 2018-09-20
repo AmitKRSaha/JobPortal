@@ -8,7 +8,6 @@ import {MatTableModule} from '@angular/material/table';
 
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './jobdata/in-memory-data.service';
 import { JobService } from './jobdata/job.service';
 
 import { AppComponent } from './app.component';
@@ -25,7 +24,6 @@ import { LoginService } from './login/login.service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {dataEncapsulation: false}),
     BrowserAnimationsModule,
     MatTableModule
   ],

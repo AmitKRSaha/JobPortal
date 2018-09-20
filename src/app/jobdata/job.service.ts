@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { jobList, interviewDetails, shortListedCandidate } from './app-data';
 
 @Injectable({ providedIn: 'root' })
 export class JobService {
@@ -17,49 +17,24 @@ export class JobService {
 
   /** GET Jobs from the server */
   getAllJobs (): Observable<any[]> {
-    return this.http.get<any[]>(`${this.jobsUrl}`)
-      .pipe(
-        tap(jobs => console.log(jobs)),
-        catchError(this.handleError('getAllJobs', []))
-      );
+      return of(jobList);
   }
 
-  getJobs (value: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.jobsUrl}/?Title=${value}`)
-      .pipe(
-        tap(jobs => console.log(jobs)),
-        catchError(this.handleError('getJobs', []))
-      );
+  getJobs (value: number): Observable<any[]> {
+    const jobs = jobList.filter((job) => job.id === value);
+
+    return of(jobs);
   }
 
-  getShortListedCandidate (value: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.candidateUrl}/?jobId=${value}`)
-      .pipe(
-        tap(jobs => console.log(jobs)),
-        catchError(this.handleError('getShortListedCandidate', []))
-      );
+  getShortListedCandidate (value: number): Observable<any[]> {
+    const candidates = shortListedCandidate.filter((candidate) => candidate.jobId === value);
+    return of(candidates);
   }
 
-  getInterviewDetails (value: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.intervieweUrl}/?shrtListId=${value}`)
-      .pipe(
-        tap(jobs => console.log(jobs)),
-        catchError(this.handleError('getInterview', []))
-      );
+  getInterviewDetails (value: number): Observable<any[]> {
+    const interviews = interviewDetails.filter((interview) => interview.shrtListId === value);
+    return of(interviews);
   }
-
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
-
-
 
 }
+
