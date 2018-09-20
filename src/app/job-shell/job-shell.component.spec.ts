@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { JobShellComponent } from './job-shell.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
 
 
 describe('JobShellComponent', () => {
@@ -11,7 +13,7 @@ describe('JobShellComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ JobShellComponent,
       ],
-      imports: [HttpClientModule],
+      imports: [HttpClientModule, BrowserAnimationsModule, MatTableModule],
     })
     .compileComponents();
   }));
@@ -53,8 +55,8 @@ describe('JobShellComponent', () => {
      expect(component.allPosedJobs.length).toEqual(2);
 
      component.checkChanged(true, 'open');
-    expect(component.postedJobs.length).toEqual(1);
-    expect(component.postedJobs[0].id).toEqual(1);
+    expect(component.dataSource.length).toEqual(1);
+    expect(component.dataSource[0].id).toEqual(1);
 
   });
 
@@ -65,8 +67,8 @@ describe('JobShellComponent', () => {
     expect(component.allPosedJobs.length).toEqual(2);
 
     component.checkChanged(true, 'closed');
-   expect(component.postedJobs.length).toEqual(1);
-   expect(component.postedJobs[0].id).toEqual(2);
+   expect(component.dataSource.length).toEqual(1);
+   expect(component.dataSource[0].id).toEqual(2);
 
  });
 });

@@ -40,10 +40,10 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getShortListedCandidate(row.id)"></tr>
 </table>
 
-<div [ngClass]="{'open': opensection.postedJobs == 'open', 'closed': opensection.postedJobs == 'closed'}">
+<!-- <div [ngClass]="{'open': opensection.postedJobs == 'open', 'closed': opensection.postedJobs == 'closed'}">
   <div class="card border-success mb-3" style="max-width: 100%;">
       <div class="card-header bg-transparent border-success">Posted Jobs</div>
       <div class="card-body text-success">
@@ -63,7 +63,7 @@
             </div>
       </div>
     </div>
-</div>
+</div> -->
 
 <div class="row">
   <div class="col-md-6">

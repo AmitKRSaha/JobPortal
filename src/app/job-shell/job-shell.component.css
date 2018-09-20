@@ -1,6 +1,4 @@
-.jobsdetail:hover {
-  background-color:aqua !important;
-}
+
 
 .closed {
   display: none;
@@ -12,4 +10,12 @@
 
 table {
   width: 100%;
+}
+
+tr {
+  cursor: pointer;
+}
+
+tr:hover {
+  background-color:aqua !important;
 }

@@ -28,7 +28,7 @@ export class JobShellComponent implements OnInit, OnDestroy {
     this.sub = this.jobService.getAllJobs().subscribe(data => {
       jobId = data[0].id;
       this.dataSource = data;
-      this.allPosedJobs = this.postedJobs;
+      this.allPosedJobs = data;
       this.opensection.postedJobs = 'open';
       this.opensection.shortListed = 'open';
       this.opensection.interview = 'open';
@@ -43,7 +43,7 @@ export class JobShellComponent implements OnInit, OnDestroy {
   }
 
   getPostedJobs(value: string) {
-    this.postedJobs = this.allPosedJobs.filter((jobs) => jobs.Title.toUpperCase().includes(value.toUpperCase()));
+    this.dataSource = this.allPosedJobs.filter((jobs) => jobs.Title.toUpperCase().includes(value.toUpperCase()));
 
     this.opensection.postedJobs = 'open';
       this.opensection.shortListed = 'closed';
@@ -84,11 +84,11 @@ export class JobShellComponent implements OnInit, OnDestroy {
       this.opensection.interview = 'closed';
 
     if (checked && value === 'open') {
-      this.postedJobs = this.allPosedJobs.filter((jobs) => jobs.Status.toUpperCase().includes(value.toUpperCase()));
+      this.dataSource = this.allPosedJobs.filter((jobs) => jobs.Status.toUpperCase().includes(value.toUpperCase()));
     } else if (checked && value === 'closed') {
-      this.postedJobs = this.allPosedJobs.filter((jobs) => jobs.Status.toUpperCase().includes(value.toUpperCase()));
+      this.dataSource = this.allPosedJobs.filter((jobs) => jobs.Status.toUpperCase().includes(value.toUpperCase()));
     } else {
-    this.postedJobs = this.allPosedJobs;
+      this.dataSource = this.allPosedJobs;
     }
 
   }
