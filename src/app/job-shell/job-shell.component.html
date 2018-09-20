@@ -1,0 +1,81 @@
+<div class="row" style="margin-bottom: 1%">
+  <div class="col-md-3"></div>
+  <div class="col-md-1"><input  class="form-check-input" (change)="checkChanged($event.target.checked, 'open')" type="checkbox"/>Open</div>
+  <div class="col-md-1"><input  class="form-check-input" (change)="checkChanged($event.target.checked, 'closed')" type="checkbox"/>Closed</div>
+  <div class="col-md-6">
+    Title: <input type="text" #searchItem placeholder="Search term" style="margin-right: 1%"/>
+    <button class="btn btn-primary" (click)="getPostedJobs(searchItem.value)">Search</button>
+  </div>
+</div>
+
+<!-- For Posted Jobs -->
+<div [ngClass]="{'open': opensection.postedJobs == 'open', 'closed': opensection.postedJobs == 'closed'}">
+    <div class="card border-success mb-3" style="max-width: 100%;">
+        <div class="card-header bg-transparent border-success">Posted Jobs</div>
+        <div class="card-body text-success">
+          <h5 class="card-title"><div class="row">
+              <div class="col-md-3">Company</div>
+              <div class="col-md-3">Title</div>
+              <div class="col-md-3">Date Posted</div>
+              <div class="col-md-3">Status</div>
+            </div></h5>
+            <div class="row card-footer bg-transparent border-success jobsdetail" style="cursor: pointer;"
+                *ngFor="let jobs of this.postedJobs; let i = index" (click)="getShortListedCandidate(jobs.id)">
+                <div class="col-md-3">{{jobs.name}}</div>
+                <div class="col-md-3">{{jobs.Title}}</div>
+                <div class="col-md-3">{{jobs.Date_Posted}}</div>
+                <div class="col-md-3">{{jobs.Status}}</div>
+
+              </div>
+        </div>
+      </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+      <!-- For Short Listed Candidate -->
+      <div [ngClass]="{'open': opensection.shortListed == 'open', 'closed': opensection.shortListed == 'closed'}">
+          <div class="card border-success mb-3" style="max-width: 100%;">
+              <div class="card-header bg-transparent border-success">Candidate Details</div>
+              <div class="card-body text-success">
+                <h5 class="card-title"><div class="row">
+                    <div class="col-md-3">Name</div>
+                    <div class="col-md-3">Works At</div>
+                    <div class="col-md-3">Exp</div>
+                    <div class="col-md-3">CTC</div>
+                  </div></h5>
+                  <div class="row card-footer bg-transparent border-success jobsdetail" style="cursor: pointer;"
+                      *ngFor="let candidate of this.cadidatedetails; let i = index" (click)="getCandidateInterviewDetails(candidate.jobId)">
+                      <div class="col-md-3">{{candidate.name}}</div>
+                      <div class="col-md-3">{{candidate.worksat}}</div>
+                      <div class="col-md-3">{{candidate.Exp}}</div>
+                      <div class="col-md-3">{{candidate.CTC}}</div>
+                    </div>
+              </div>
+            </div>
+      </div>
+  </div>
+  <div class="col-md-6">
+      <!-- For Interview Details -->
+      <div [ngClass]="{'open': opensection.interview == 'open', 'closed': opensection.interview == 'closed'}">
+          <div class="card border-success mb-3" style="max-width: 100%;">
+              <div class="card-header bg-transparent border-success">Interview Details</div>
+              <div class="card-body text-success">
+                <h5 class="card-title"><div class="row">
+                    <div class="col-md-3">Interview</div>
+                    <div class="col-md-4">Interviewer</div>
+                    <div class="col-md-2">Date</div>
+                    <div class="col-md-3">Result</div>
+                  </div></h5>
+                  <div class="row card-footer bg-transparent border-success jobsdetail" style="cursor: pointer;"
+                      *ngFor="let interview of this.interviewdetails; let i = index">
+                      <div class="col-md-3">{{interview.Interview}}</div>
+                      <div class="col-md-4">{{interview.interviewer}}</div>
+                      <div class="col-md-2">{{interview.Date}}</div>
+                      <div class="col-md-3">{{interview.Result}}</div>
+                    </div>
+              </div>
+            </div>
+      </div>
+  </div>
+</div>

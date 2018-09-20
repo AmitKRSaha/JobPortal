@@ -1,0 +1,22 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Job Consultant Portal
+  </h1>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+      <a class="navbar-brand">{{pageTitle}}</a>
+
+      <ul class="navbar-nav navbar-right">
+          <li class="nav-item">
+              <a class="nav-link" style="cursor: pointer" *ngIf="loginService.user" (click)="logOut()">Hi {{loginService.user | uppercase}}</a>
+          </li>
+      </ul>
+  </div>
+</nav>
+
+<div class="container" style="margin-top: 5px;">
+  <div *ngIf="!loginService.loggedIn"> <app-login ></app-login></div>
+  <div *ngIf="loginService.loggedIn"><app-job-shell [opensection]="opensection" ></app-job-shell></div>
+</div>

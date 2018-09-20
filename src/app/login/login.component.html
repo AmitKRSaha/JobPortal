@@ -1,0 +1,12 @@
+<div class="form">
+        <div class="form-group">
+          <label for="userName">User Name</label>
+          <input type="email" #user class="form-control" id="userName" aria-describedby="userNameHelp" placeholder="Enter User Name">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your userName with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="login(user.value)">Submit</button>
+</div>

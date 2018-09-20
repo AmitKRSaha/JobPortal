@@ -1,0 +1,11 @@
+.jobsdetail:hover {
+  background-color:aqua !important;
+}
+
+.closed {
+  display: none;
+}
+
+.open{
+  display: inherit;
+}
