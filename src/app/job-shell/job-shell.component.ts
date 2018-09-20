@@ -14,8 +14,14 @@ export class JobShellComponent implements OnInit, OnDestroy {
   cadidatedetails: any[];
   interviewdetails: any[];
   sub: ISubscription;
-  displayedColumns: string[] = ['id', 'name', 'Title', 'Date_Posted', 'Status'];
+  displayedColumns: string[] = [ 'name', 'Title', 'Date_Posted', 'Status'];
   dataSource: any[];
+
+  displayedCandidateColumns: string[] = ['name', 'worksat', 'Exp', 'CTC'];
+  dataCandidateSource: any[] ;
+
+  displayedInterviewColumns: string[] = ['Interview', 'interviewer', 'Date', 'Result'];
+  dataInterviewSource: any[] ;
 
 
   @Input() opensection;
@@ -33,9 +39,9 @@ export class JobShellComponent implements OnInit, OnDestroy {
       this.opensection.shortListed = 'open';
       this.opensection.interview = 'open';
       this.jobService.getShortListedCandidate(jobId).subscribe(candidate => {
-        this.cadidatedetails = candidate;
+        this.dataCandidateSource = candidate;
         this.jobService.getInterviewDetails(candidate[0].id).subscribe(inter => {
-          this.interviewdetails = inter;
+          this.dataInterviewSource = inter;
           this.opensection.interview = 'open';
         });
       });
@@ -54,7 +60,7 @@ export class JobShellComponent implements OnInit, OnDestroy {
     this.jobService.getShortListedCandidate(value).subscribe(data => {
       // console.log('From get candidate method' + data);
       if (data.length > 0) {
-        this.cadidatedetails = data;
+        this.dataCandidateSource = data;
         this.opensection.shortListed = 'open';
         this.opensection.interview = 'closed';
       } else {
@@ -69,7 +75,7 @@ export class JobShellComponent implements OnInit, OnDestroy {
     this.jobService.getInterviewDetails(value).subscribe(data => {
       // console.log('From get interview method' + data);
       if (data.length > 0) {
-      this.interviewdetails = data;
+      this.dataInterviewSource = data;
       this.opensection.interview = 'open';
       } else {
         this.opensection.interview = 'closed';
