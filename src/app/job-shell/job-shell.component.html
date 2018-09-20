@@ -4,7 +4,7 @@
   <div class="col-md-1"><input  class="form-check-input" (change)="checkChanged($event.target.checked, 'closed')" type="checkbox"/>Closed</div>
   <div class="col-md-6">
     Title: <input type="text" #searchItem placeholder="Search term" style="margin-right: 1%"/>
-    <button class="btn btn-primary" (click)="getPostedJobs(searchItem.value)">Search</button>
+    <button class="btn btn-primary" (click)="getPostedJobs('a')">Search</button>
   </div>
 </div>
 

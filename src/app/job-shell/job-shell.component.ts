@@ -26,43 +26,42 @@ export class JobShellComponent implements OnInit, OnDestroy {
   constructor(private jobService: JobService) { }
 
   ngOnInit() {
-    let jobId;
-
-    this.sub = this.jobService.getAllJobs().subscribe(data => {
-      jobId = data[0].id;
-      this.dataSource = data;
-      this.allPosedJobs = data;
-      this.jobService.getShortListedCandidate(jobId).subscribe(candidate => {
-        this.dataCandidateSource = candidate;
-        this.jobService.getInterviewDetails(candidate[0].id).subscribe(inter => {
-          this.dataInterviewSource = inter;
-        });
-      });
-    });
+    this.jobService.getAllJobs();
+    // this.sub = this.jobService.getAllJobs().subscribe(data => {
+    //   jobId = data[0].id;
+    //   this.dataSource = data;
+    //   this.allPosedJobs = data;
+    //   this.jobService.getShortListedCandidate(jobId).subscribe(candidate => {
+    //     this.dataCandidateSource = candidate;
+    //     this.jobService.getInterviewDetails(candidate[0].id).subscribe(inter => {
+    //       this.dataInterviewSource = inter;
+    //     });
+    //   });
+    // });
   }
 
   getPostedJobs(value: string) {
-    this.dataSource = this.allPosedJobs.filter((jobs) => jobs.Title.toUpperCase().includes(value.toUpperCase()));
+    // this.dataSource = this.allPosedJobs.filter((jobs) => jobs.Title.toUpperCase().includes(value.toUpperCase()));
   }
 
   getShortListedCandidate(value: number) {
-    this.jobService.getShortListedCandidate(value).subscribe(data => {
-      // console.log('From get candidate method' + data);
-      if (data.length > 0) {
-        this.dataCandidateSource = data;
-      } else {
-      }
-    });
+    // this.jobService.getShortListedCandidate(value).subscribe(data => {
+    //   // console.log('From get candidate method' + data);
+    //   if (data.length > 0) {
+    //     this.dataCandidateSource = data;
+    //   } else {
+    //   }
+    // });
 
   }
 
   getCandidateInterviewDetails(value: number) {
-    this.jobService.getInterviewDetails(value).subscribe(data => {
-      // console.log('From get interview method' + data);
-      if (data.length > 0) {
-      this.dataInterviewSource = data;
-      }
-    });
+    // this.jobService.getInterviewDetails(value).subscribe(data => {
+    //   // console.log('From get interview method' + data);
+    //   if (data.length > 0) {
+    //   this.dataInterviewSource = data;
+    //   }
+    // });
   }
 
   checkChanged(checked: boolean, value: string) {
