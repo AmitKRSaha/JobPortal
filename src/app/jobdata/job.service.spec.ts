@@ -47,29 +47,29 @@ describe('JobService', () => {
     });
   });
 
-  it('should be get call for getShortListedCandidate', () => {
-    service.getInterviewDetails(1).subscribe((data: any) => {
+  // it('should be get call for getShortListedCandidate', () => {
+  //   service.getInterviewDetails(1).subscribe((data: any) => {
 
-      const req = httpMock.expectOne(`api/url?anything=1`, 'call to api');
-      expect(req.request.method).toBe('GET');
-      req.flush({
-        name: 'Amit'
-      });
-      httpMock.verify();
-    });
-  });
+  //     const req = httpMock.expectOne(`api/url?anything=1`, 'call to api');
+  //     expect(req.request.method).toBe('GET');
+  //     req.flush({
+  //       name: 'Amit'
+  //     });
+  //     httpMock.verify();
+  //   });
+  // });
 
-  it('should be get call for getInterviewDetails', () => {
-    service.getInterviewDetails(1).subscribe((data: any) => {
+  // it('should be get call for getInterviewDetails', () => {
+  //   service.getInterviewDetails(1).subscribe((data: any) => {
 
-      const req = httpMock.expectOne(`api/url?anything=1`, 'call to api');
-      expect(req.request.method).toBe('GET');
-      req.flush({
-        name: 'Amit'
-      });
-      httpMock.verify();
-    });
-  });
+  //     const req = httpMock.expectOne(`api/url?anything=1`, 'call to api');
+  //     expect(req.request.method).toBe('GET');
+  //     req.flush({
+  //       name: 'Amit'
+  //     });
+  //     httpMock.verify();
+  //   });
+  // });
 
 });
 

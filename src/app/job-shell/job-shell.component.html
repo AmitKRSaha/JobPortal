@@ -9,7 +9,6 @@
 </div>
 
 <!-- For Posted Jobs -->
-
 <div class="row"  style="margin-bottom: 2%"><div class="col-md-12">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -42,7 +41,7 @@
 <div class="row">
   <div class="col-md-6">
       <!-- For Short Listed Candidate -->
-      <div [ngClass]="{'open': opensection.shortListed == 'open', 'closed': opensection.shortListed == 'closed'}">
+      <div >
         <table mat-table [dataSource]="dataCandidateSource" class="mat-elevation-z8">
 
           <ng-container matColumnDef="name">
@@ -74,7 +73,7 @@
   </div>
   <div class="col-md-6">
       <!-- For Interview Details -->
-      <div [ngClass]="{'open': opensection.interview == 'open', 'closed': opensection.interview == 'closed'}">
+      <div>
         <table mat-table [dataSource]="dataInterviewSource" class="mat-elevation-z8">
 
           <ng-container matColumnDef="Interview">

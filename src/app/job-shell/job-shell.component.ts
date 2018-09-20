@@ -23,9 +23,6 @@ export class JobShellComponent implements OnInit, OnDestroy {
   displayedInterviewColumns: string[] = ['Interview', 'interviewer', 'Date', 'Result'];
   dataInterviewSource: any[] ;
 
-
-  @Input() opensection;
-
   constructor(private jobService: JobService) { }
 
   ngOnInit() {
@@ -35,14 +32,10 @@ export class JobShellComponent implements OnInit, OnDestroy {
       jobId = data[0].id;
       this.dataSource = data;
       this.allPosedJobs = data;
-      this.opensection.postedJobs = 'open';
-      this.opensection.shortListed = 'open';
-      this.opensection.interview = 'open';
       this.jobService.getShortListedCandidate(jobId).subscribe(candidate => {
         this.dataCandidateSource = candidate;
         this.jobService.getInterviewDetails(candidate[0].id).subscribe(inter => {
           this.dataInterviewSource = inter;
-          this.opensection.interview = 'open';
         });
       });
     });
@@ -50,10 +43,6 @@ export class JobShellComponent implements OnInit, OnDestroy {
 
   getPostedJobs(value: string) {
     this.dataSource = this.allPosedJobs.filter((jobs) => jobs.Title.toUpperCase().includes(value.toUpperCase()));
-
-    this.opensection.postedJobs = 'open';
-      this.opensection.shortListed = 'closed';
-      this.opensection.interview = 'closed';
   }
 
   getShortListedCandidate(value: number) {
@@ -61,11 +50,7 @@ export class JobShellComponent implements OnInit, OnDestroy {
       // console.log('From get candidate method' + data);
       if (data.length > 0) {
         this.dataCandidateSource = data;
-        this.opensection.shortListed = 'open';
-        this.opensection.interview = 'closed';
       } else {
-        this.opensection.shortListed = 'closed';
-        this.opensection.interview = 'closed';
       }
     });
 
@@ -76,18 +61,12 @@ export class JobShellComponent implements OnInit, OnDestroy {
       // console.log('From get interview method' + data);
       if (data.length > 0) {
       this.dataInterviewSource = data;
-      this.opensection.interview = 'open';
-      } else {
-        this.opensection.interview = 'closed';
       }
     });
   }
 
   checkChanged(checked: boolean, value: string) {
     // console.log(checked , value);
-      this.opensection.postedJobs = 'open';
-      this.opensection.shortListed = 'closed';
-      this.opensection.interview = 'closed';
 
     if (checked && value === 'open') {
       this.dataSource = this.allPosedJobs.filter((jobs) => jobs.Status.toUpperCase().includes(value.toUpperCase()));

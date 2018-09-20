@@ -13,12 +13,6 @@ export class AppComponent implements OnInit {
 
   loggedIn = false;
 
-  opensection = {
-    postedJobs: 'closed',
-    shortListed: 'closed',
-    interview: 'closed'
-  };
-
   constructor(private jobService: JobService, public loginService: LoginService) {
   }
 
