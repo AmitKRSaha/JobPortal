@@ -9,3 +9,7 @@
 .open{
   display: inherit;
 }
+
+table {
+  width: 100%;
+}

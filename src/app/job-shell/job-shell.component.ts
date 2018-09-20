@@ -14,6 +14,9 @@ export class JobShellComponent implements OnInit, OnDestroy {
   cadidatedetails: any[];
   interviewdetails: any[];
   sub: ISubscription;
+  displayedColumns: string[] = ['id', 'name', 'Title', 'Date_Posted', 'Status'];
+  dataSource: any[];
+
 
   @Input() opensection;
 
@@ -24,7 +27,7 @@ export class JobShellComponent implements OnInit, OnDestroy {
 
     this.sub = this.jobService.getAllJobs().subscribe(data => {
       jobId = data[0].id;
-      this.postedJobs = data;
+      this.dataSource = data;
       this.allPosedJobs = this.postedJobs;
       this.opensection.postedJobs = 'open';
       this.opensection.shortListed = 'open';
@@ -94,4 +97,8 @@ export class JobShellComponent implements OnInit, OnDestroy {
      // Unsubscribing...
      this.sub.unsubscribe();
   }
+
+
 }
+
+

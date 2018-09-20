@@ -9,26 +9,60 @@
 </div>
 
 <!-- For Posted Jobs -->
-<div [ngClass]="{'open': opensection.postedJobs == 'open', 'closed': opensection.postedJobs == 'closed'}">
-    <div class="card border-success mb-3" style="max-width: 100%;">
-        <div class="card-header bg-transparent border-success">Posted Jobs</div>
-        <div class="card-body text-success">
-          <h5 class="card-title"><div class="row">
-              <div class="col-md-3">Company</div>
-              <div class="col-md-3">Title</div>
-              <div class="col-md-3">Date Posted</div>
-              <div class="col-md-3">Status</div>
-            </div></h5>
-            <div class="row card-footer bg-transparent border-success jobsdetail" style="cursor: pointer;"
-                *ngFor="let jobs of this.postedJobs; let i = index" (click)="getShortListedCandidate(jobs.id)">
-                <div class="col-md-3">{{jobs.name}}</div>
-                <div class="col-md-3">{{jobs.Title}}</div>
-                <div class="col-md-3">{{jobs.Date_Posted}}</div>
-                <div class="col-md-3">{{jobs.Status}}</div>
 
-              </div>
-        </div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Title">
+    <th mat-header-cell *matHeaderCellDef> Title </th>
+    <td mat-cell *matCellDef="let element"> {{element.Title}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Date_Posted">
+    <th mat-header-cell *matHeaderCellDef> Date_Posted </th>
+    <td mat-cell *matCellDef="let element"> {{element.Date_Posted}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Status">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div [ngClass]="{'open': opensection.postedJobs == 'open', 'closed': opensection.postedJobs == 'closed'}">
+  <div class="card border-success mb-3" style="max-width: 100%;">
+      <div class="card-header bg-transparent border-success">Posted Jobs</div>
+      <div class="card-body text-success">
+        <h5 class="card-title"><div class="row">
+            <div class="col-md-3">Company</div>
+            <div class="col-md-3">Title</div>
+            <div class="col-md-3">Date Posted</div>
+            <div class="col-md-3">Status</div>
+          </div></h5>
+          <div class="row card-footer bg-transparent border-success jobsdetail" style="cursor: pointer;"
+              *ngFor="let jobs of this.postedJobs; let i = index" (click)="getShortListedCandidate(jobs.id)">
+              <div class="col-md-3">{{jobs.name}}</div>
+              <div class="col-md-3">{{jobs.Title}}</div>
+              <div class="col-md-3">{{jobs.Date_Posted}}</div>
+              <div class="col-md-3">{{jobs.Status}}</div>
+
+            </div>
       </div>
+    </div>
 </div>
 
 <div class="row">
@@ -79,3 +113,13 @@
       </div>
   </div>
 </div>
+
+
+
+
+
+
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
