@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
 
-![Sample Screen](https://github.com/AmitKRSaha/Newsletter/blob/master/src/assets/Portal.png)
+![Sample Screen](https://github.com/AmitKRSaha/JobPortal/blob/master/src/assets/Portal.png)
 
 ## Development server
 
