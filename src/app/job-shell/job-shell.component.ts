@@ -39,11 +39,7 @@ export class JobShellComponent implements OnInit, OnDestroy {
       console.log(this.dataSource);
     });
   }
-
-
-
   getPostedJobs(value: string) {
-    // value = 'Java';
     this.dataSource = this.allPosedJobs['jobList'].filter((jobs) => {
       const jobValues = Object.values(jobs);
       if (jobValues.join(';').toUpperCase().search(value.toUpperCase()) >= 0) {

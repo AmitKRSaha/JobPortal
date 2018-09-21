@@ -1,74 +1,123 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { JobShellComponent } from './job-shell.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatTableModule} from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
 
 
-describe('JobShellComponent', () => {
+describe('JobShellComponent( Basic Functionality Check)', () => {
   let component: JobShellComponent;
   let fixture: ComponentFixture<JobShellComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JobShellComponent,
+      declarations: [JobShellComponent,
       ],
       imports: [HttpClientModule, BrowserAnimationsModule, MatTableModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(JobShellComponent);
     component = fixture.componentInstance;
-    // component.allPosedJobs = [{
-    //   'jobList' : [
-    //    {
-    //      'id': 1,
-    //      'name': 'IT Soft',
-    //      'Title' : 'Java Eng',
-    //      'Date_Posted' : '20/8/13',
-    //      'Status' : 'Open'
-    //    },
-    //    {
-    //      'id': 2,
-    //      'name': 'Capgemini',
-    //      'Title' : 'Dot Net',
-    //      'Date_Posted' : '20/11/13',
-    //      'Status' : 'Open'
-    //    },
-    //    {
-    //      'id': 3,
-    //      'name': 'FAI',
-    //      'Title' : 'Angular',
-    //      'Date_Posted' : '20/5/16',
-    //      'Status' : 'Closed'
-    //    }
-    //  ]
-    // }];
+    component.allPosedJobs = [
+      {
+        'id': 1,
+        'name': 'IT Soft',
+        'Title': 'Java Eng',
+        'Date_Posted': '20/8/13',
+        'Status': 'Open'
+      }];
+
 
     fixture.detectChanges();
+  });
+  beforeEach(() => {
+    component.allPosedJobs['jobList'] = [
+      {
+        'id': 1,
+        'name': 'OpenTest',
+        'Title': 'OpenTest',
+        'Date_Posted': '20/8/13',
+        'Status': 'Open'
+      }, {
+        'id': 2,
+        'name': 'ClosedTest',
+        'Title': 'ClosedTest',
+        'Date_Posted': '21/11/14',
+        'Status': 'Closed'
+      }];
+    component.allPosedJobs['shortListedCandidate'] = [
+      {
+        'jobId': 1,
+        'id': 1,
+        'name': 'IT Soft',
+        'Title': 'Java Eng',
+        'Date_Posted': '20/8/13',
+        'Status': 'Open'
+      },
+      {
+        'jobId': 2,
+        'id': 1,
+        'name': 'IT Soft',
+        'Title': 'Java Eng',
+        'Date_Posted': '20/8/13',
+        'Status': 'Open'
+      }];
+    component.allPosedJobs['interviewDetails'] = [
+      {
+        'shrtListId': 1,
+        'id': 1,
+        'name': 'IT Soft',
+        'Title': 'Java Eng',
+        'Date_Posted': '20/8/13',
+        'Status': 'Open'
+      }];
+
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-//   it('#checkChanged() should change Value when passed true and open', () => {
-//      expect(component.allPosedJobs.length).toEqual(2);
+  it('#checkChanged() should change Value when passed true and open', () => {
 
-//      component.checkChanged(true, 'open');
-//     expect(component.dataSource.length).toEqual(1);
-//     expect(component.dataSource[0].id).toEqual(1);
+    component.checkChanged(true, 'open');
+    expect(component.dataSource.length).toEqual(1);
+    expect(component.dataSource[0].id).toEqual(1);
 
-//   });
+  });
 
-//   it('#checkChanged() should change Value when passed true and closed', () => {
-//     expect(component.allPosedJobs.length).toEqual(2);
+  it('#checkChanged() should change Value when passed true and closed', () => {
 
-//     component.checkChanged(true, 'closed');
-//    expect(component.dataSource.length).toEqual(1);
-//    expect(component.dataSource[0].id).toEqual(2);
+    component.checkChanged(true, 'closed');
+    expect(component.dataSource.length).toEqual(1);
+    expect(component.dataSource[0].id).toEqual(2);
 
-//  });
+  });
+
+  it('#getPostedJobs should filter out when name is passed', () => {
+    component.getPostedJobs('Open');
+    expect(component.dataSource.length).toEqual(1);
+    expect(component.dataSource[0].id).toEqual(1);
+  });
+
+  it('#getPostedJobs should filter out when title is passed', () => {
+    component.getPostedJobs('Open');
+    expect(component.dataSource.length).toEqual(1);
+    expect(component.dataSource[0].id).toEqual(1);
+  });
+
+  it('#getPostedJobs should filter out when Date_Posted is passed', () => {
+    component.getPostedJobs('20');
+    expect(component.dataSource.length).toEqual(1);
+    expect(component.dataSource[0].id).toEqual(1);
+  });
+
+  it('#getPostedJobs should filter out when status is passed', () => {
+    component.getPostedJobs('Closed');
+    expect(component.dataSource.length).toEqual(1);
+    expect(component.dataSource[0].id).toEqual(2);
+  });
 });
