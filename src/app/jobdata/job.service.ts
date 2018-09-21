@@ -19,9 +19,7 @@ export class JobService {
 
      /** GET Jobs from the server */
   getAllJobs (): any {
-    return this.http.get<any[]>(`${this.apiHost}`).subscribe(data => {
-      this.alldata = data;
-    });
+    return this.http.get<any[]>(`${this.apiHost}`);
   }
 
   // getJobs (value: string): Observable<any[]> {

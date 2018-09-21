@@ -26,18 +26,23 @@ export class JobShellComponent implements OnInit, OnDestroy {
   constructor(private jobService: JobService) { }
 
   ngOnInit() {
-    this.jobService.getAllJobs();
-    // this.sub = this.jobService.getAllJobs().subscribe(data => {
-    //   jobId = data[0].id;
-    //   this.dataSource = data;
-    //   this.allPosedJobs = data;
-    //   this.jobService.getShortListedCandidate(jobId).subscribe(candidate => {
-    //     this.dataCandidateSource = candidate;
-    //     this.jobService.getInterviewDetails(candidate[0].id).subscribe(inter => {
-    //       this.dataInterviewSource = inter;
-    //     });
-    //   });
-    // });
+    this.jobService.getAllJobs().subscribe(data => {
+      this.allPosedJobs = data;
+
+      this.dataSource = data.jobList;
+      this.dataCandidateSource = this.getDataFromDataSet(data.shortListedCandidate, 'jobId', this.dataSource[0].id);
+      this.dataInterviewSource = this.getDataFromDataSet(data.interviewDetails, 'shrtListId', data.shortListedCandidate[0].jobId);
+
+      // this.dataCandidateSource = data.shortListedCandidate;
+      // this.dataInterviewSource = data.interviewDetails;
+      console.log(this.dataSource);
+    });
+  }
+
+  getDataFromDataSet(dataSet, filterProperty: string, filterItem: number) {
+    const result = dataSet.filter((data) => data[filterProperty] === filterItem);
+    // console.log(result );
+    return result;
   }
 
   getPostedJobs(value: string) {
@@ -45,13 +50,8 @@ export class JobShellComponent implements OnInit, OnDestroy {
   }
 
   getShortListedCandidate(value: number) {
-    // this.jobService.getShortListedCandidate(value).subscribe(data => {
-    //   // console.log('From get candidate method' + data);
-    //   if (data.length > 0) {
-    //     this.dataCandidateSource = data;
-    //   } else {
-    //   }
-    // });
+    this.dataCandidateSource = this.getDataFromDataSet(this.allPosedJobs['shortListedCandidate'], 'jobId', value);
+    this.dataInterviewSource = this.getDataFromDataSet(this.allPosedJobs['interviewDetails'], 'shrtListId', value);
 
   }
 
@@ -63,6 +63,8 @@ export class JobShellComponent implements OnInit, OnDestroy {
     //   }
     // });
   }
+
+
 
   checkChanged(checked: boolean, value: string) {
     // console.log(checked , value);
