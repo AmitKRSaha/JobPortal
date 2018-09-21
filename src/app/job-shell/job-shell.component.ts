@@ -43,7 +43,19 @@ export class JobShellComponent implements OnInit, OnDestroy {
 
 
   getPostedJobs(value: string) {
-    // this.dataSource = this.allPosedJobs.filter((jobs) => jobs.Title.toUpperCase().includes(value.toUpperCase()));
+    // value = 'Java';
+    this.dataSource = this.allPosedJobs['jobList'].filter((jobs) => {
+      const jobValues = Object.values(jobs);
+      if (jobValues.join(';').search(value) >= 0) {
+        return jobs;
+      }
+    });
+
+    // tslint:disable-next-line:max-line-length
+    this.dataCandidateSource = this.jobService.getDataFromDataSet(this.allPosedJobs['shortListedCandidate'], 'jobId', this.dataSource[0].id);
+    // tslint:disable-next-line:max-line-length
+    this.dataInterviewSource = this.jobService.getDataFromDataSet(this.allPosedJobs['interviewDetails'], 'shrtListId', this.dataCandidateSource[0].jobId);
+
   }
 
   getShortListedCandidate(value: number) {
@@ -75,7 +87,7 @@ export class JobShellComponent implements OnInit, OnDestroy {
     }
     // tslint:disable-next-line:max-line-length
     this.dataCandidateSource = this.jobService.getDataFromDataSet(this.allPosedJobs['shortListedCandidate'], 'jobId', this.dataSource[0].id);
-    if(this.dataCandidateSource[0]){
+    if (this.dataCandidateSource[0]) {
     // tslint:disable-next-line:max-line-length
      this.dataInterviewSource = this.jobService.getDataFromDataSet(this.allPosedJobs['interviewDetails'], 'shrtListId', this.dataCandidateSource[0].jobId);
     }
