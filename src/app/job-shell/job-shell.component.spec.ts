@@ -120,4 +120,30 @@ describe('JobShellComponent( Basic Functionality Check)', () => {
     expect(component.dataSource.length).toEqual(1);
     expect(component.dataSource[0].id).toEqual(2);
   });
+
+  it('#getShortListedCandidate should filter out candidate and interview list when correct value passed', () => {
+    component.getShortListedCandidate(1);
+    expect(component.dataCandidateSource.length).toEqual(1);
+    expect(component.dataCandidateSource[0].id).toEqual(1);
+    expect(component.dataInterviewSource.length).toEqual(1);
+    expect(component.dataInterviewSource[0].id).toEqual(1);
+  });
+
+  it('#getShortListedCandidate should filter out only candidate list when correct value passed', () => {
+    component.getShortListedCandidate(2);
+    expect(component.dataCandidateSource.length).toEqual(1);
+    expect(component.dataCandidateSource[0].id).toEqual(1);
+    expect(component.dataInterviewSource.length).toEqual(0);
+  });
+
+  it('#getCandidateInterviewDetails should filter out only interview list when correct value passed', () => {
+    component.getCandidateInterviewDetails(1);
+    expect(component.dataInterviewSource.length).toEqual(1);
+    expect(component.dataInterviewSource[0].id).toEqual(1);
+  });
+
+  it('#getCandidateInterviewDetails should not set any thing interview list when correct value passed', () => {
+    component.getCandidateInterviewDetails(2);
+    expect(component.dataInterviewSource.length).toEqual(0);
+  });
 });

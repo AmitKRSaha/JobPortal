@@ -34,9 +34,7 @@ export class JobShellComponent implements OnInit, OnDestroy {
       // tslint:disable-next-line:max-line-length
       this.dataInterviewSource = this.jobService.getDataFromDataSet(data.interviewDetails, 'shrtListId', data.shortListedCandidate[0].jobId);
 
-      // this.dataCandidateSource = data.shortListedCandidate;
-      // this.dataInterviewSource = data.interviewDetails;
-      console.log(this.dataSource);
+      // console.log(this.dataSource);
     });
   }
   getPostedJobs(value: string) {
@@ -47,29 +45,17 @@ export class JobShellComponent implements OnInit, OnDestroy {
       }
     });
 
-    // tslint:disable-next-line:max-line-length
-    this.dataCandidateSource = this.jobService.getDataFromDataSet(this.allPosedJobs['shortListedCandidate'], 'jobId', this.dataSource[0].id);
-    // tslint:disable-next-line:max-line-length
-    this.dataInterviewSource = this.jobService.getDataFromDataSet(this.allPosedJobs['interviewDetails'], 'shrtListId', this.dataCandidateSource[0].jobId);
-
+    this.getShortListedCandidate(this.dataSource[0].id);
   }
 
   getShortListedCandidate(value: number) {
     this.dataCandidateSource = this.jobService.getDataFromDataSet(this.allPosedJobs['shortListedCandidate'], 'jobId', value);
-    this.dataInterviewSource = this.jobService.getDataFromDataSet(this.allPosedJobs['interviewDetails'], 'shrtListId', value);
-
+    this.getCandidateInterviewDetails(this.dataCandidateSource[0].jobId);
   }
 
   getCandidateInterviewDetails(value: number) {
-    // this.jobService.getInterviewDetails(value).subscribe(data => {
-    //   // console.log('From get interview method' + data);
-    //   if (data.length > 0) {
-    //   this.dataInterviewSource = data;
-    //   }
-    // });
+    this.dataInterviewSource = this.jobService.getDataFromDataSet(this.allPosedJobs['interviewDetails'], 'shrtListId', value);
   }
-
-
 
   checkChanged(checked: boolean, value: string) {
     // console.log(checked , value);
