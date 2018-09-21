@@ -46,7 +46,7 @@ export class JobShellComponent implements OnInit, OnDestroy {
     // value = 'Java';
     this.dataSource = this.allPosedJobs['jobList'].filter((jobs) => {
       const jobValues = Object.values(jobs);
-      if (jobValues.join(';').search(value) >= 0) {
+      if (jobValues.join(';').toUpperCase().search(value.toUpperCase()) >= 0) {
         return jobs;
       }
     });
@@ -90,6 +90,8 @@ export class JobShellComponent implements OnInit, OnDestroy {
     if (this.dataCandidateSource[0]) {
     // tslint:disable-next-line:max-line-length
      this.dataInterviewSource = this.jobService.getDataFromDataSet(this.allPosedJobs['interviewDetails'], 'shrtListId', this.dataCandidateSource[0].jobId);
+    } else {
+      this.dataInterviewSource = null;
     }
   }
 
