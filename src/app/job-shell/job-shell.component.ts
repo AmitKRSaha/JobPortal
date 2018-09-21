@@ -67,13 +67,18 @@ export class JobShellComponent implements OnInit, OnDestroy {
     // console.log(checked , value);
 
     if (checked && value === 'open') {
-      this.dataSource = this.allPosedJobs.filter((jobs) => jobs.Status.toUpperCase().includes(value.toUpperCase()));
+      this.dataSource = this.allPosedJobs['jobList'].filter((jobs) => jobs.Status.toUpperCase().includes(value.toUpperCase()));
     } else if (checked && value === 'closed') {
-      this.dataSource = this.allPosedJobs.filter((jobs) => jobs.Status.toUpperCase().includes(value.toUpperCase()));
+      this.dataSource = this.allPosedJobs['jobList'].filter((jobs) => jobs.Status.toUpperCase().includes(value.toUpperCase()));
     } else {
-      this.dataSource = this.allPosedJobs;
+      this.dataSource = this.allPosedJobs['jobList'];
     }
-
+    // tslint:disable-next-line:max-line-length
+    this.dataCandidateSource = this.jobService.getDataFromDataSet(this.allPosedJobs['shortListedCandidate'], 'jobId', this.dataSource[0].id);
+    if(this.dataCandidateSource[0]){
+    // tslint:disable-next-line:max-line-length
+     this.dataInterviewSource = this.jobService.getDataFromDataSet(this.allPosedJobs['interviewDetails'], 'shrtListId', this.dataCandidateSource[0].jobId);
+    }
   }
 
   ngOnDestroy() {
