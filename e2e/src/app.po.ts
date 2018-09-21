@@ -1,6 +1,9 @@
 import { browser, by, element } from 'protractor';
 
 export class AppPage {
+  shouldClickLoginButton(): any {
+    element(by.css('app-login button')).click();
+  }
   navigateTo() {
     return browser.get('/');
   }
