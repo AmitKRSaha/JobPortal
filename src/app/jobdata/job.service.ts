@@ -22,6 +22,12 @@ export class JobService {
     return this.http.get<any[]>(`${this.apiHost}`);
   }
 
+  getDataFromDataSet(dataSet, filterProperty: string, filterItem: number) {
+    const result = dataSet.filter((data) => data[filterProperty] === filterItem);
+    // console.log(result );
+    return result;
+  }
+
   // getJobs (value: string): Observable<any[]> {
   //   return this.http.get<any[]>(`${this.jobsUrl}/?Title=${value}`)
   //     .pipe(

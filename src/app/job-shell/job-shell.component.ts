@@ -30,8 +30,9 @@ export class JobShellComponent implements OnInit, OnDestroy {
       this.allPosedJobs = data;
 
       this.dataSource = data.jobList;
-      this.dataCandidateSource = this.getDataFromDataSet(data.shortListedCandidate, 'jobId', this.dataSource[0].id);
-      this.dataInterviewSource = this.getDataFromDataSet(data.interviewDetails, 'shrtListId', data.shortListedCandidate[0].jobId);
+      this.dataCandidateSource = this.jobService.getDataFromDataSet(data.shortListedCandidate, 'jobId', this.dataSource[0].id);
+      // tslint:disable-next-line:max-line-length
+      this.dataInterviewSource = this.jobService.getDataFromDataSet(data.interviewDetails, 'shrtListId', data.shortListedCandidate[0].jobId);
 
       // this.dataCandidateSource = data.shortListedCandidate;
       // this.dataInterviewSource = data.interviewDetails;
@@ -39,19 +40,15 @@ export class JobShellComponent implements OnInit, OnDestroy {
     });
   }
 
-  getDataFromDataSet(dataSet, filterProperty: string, filterItem: number) {
-    const result = dataSet.filter((data) => data[filterProperty] === filterItem);
-    // console.log(result );
-    return result;
-  }
+
 
   getPostedJobs(value: string) {
     // this.dataSource = this.allPosedJobs.filter((jobs) => jobs.Title.toUpperCase().includes(value.toUpperCase()));
   }
 
   getShortListedCandidate(value: number) {
-    this.dataCandidateSource = this.getDataFromDataSet(this.allPosedJobs['shortListedCandidate'], 'jobId', value);
-    this.dataInterviewSource = this.getDataFromDataSet(this.allPosedJobs['interviewDetails'], 'shrtListId', value);
+    this.dataCandidateSource = this.jobService.getDataFromDataSet(this.allPosedJobs['shortListedCandidate'], 'jobId', value);
+    this.dataInterviewSource = this.jobService.getDataFromDataSet(this.allPosedJobs['interviewDetails'], 'shrtListId', value);
 
   }
 
@@ -81,7 +78,7 @@ export class JobShellComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
      // Unsubscribing...
-     this.sub.unsubscribe();
+     // this.sub.unsubscribe();
   }
 
 

@@ -45,20 +45,20 @@ describe('JobShellComponent', () => {
   });
 
   it('#checkChanged() should change Value when passed true and open', () => {
-     expect(component.allPosedJobs.length).toEqual(3);
+     expect(component.allPosedJobs.length).toEqual(2);
 
      component.checkChanged(true, 'open');
-    expect(component.dataSource.length).toEqual(2);
+    expect(component.dataSource.length).toEqual(1);
     expect(component.dataSource[0].id).toEqual(1);
 
   });
 
   it('#checkChanged() should change Value when passed true and closed', () => {
-    expect(component.allPosedJobs.length).toEqual(3);
+    expect(component.allPosedJobs.length).toEqual(2);
 
     component.checkChanged(true, 'closed');
    expect(component.dataSource.length).toEqual(1);
-   expect(component.dataSource[0].id).toEqual(3);
+   expect(component.dataSource[0].id).toEqual(2);
 
  });
 });
