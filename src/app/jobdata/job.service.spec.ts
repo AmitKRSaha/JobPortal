@@ -47,65 +47,28 @@ describe('JobService', () => {
     });
   });
 
-  // it('should be get call for getShortListedCandidate', () => {
-  //   service.getInterviewDetails(1).subscribe((data: any) => {
+  const testData = [
+    {
+      'shrtListId': 1,
+      'id': 1,
+      'name': 'IT Soft',
+      'Title': 'Java Eng',
+      'Date_Posted': '20/8/13',
+      'Status': 'Open'
+    }];
+    it('#getDataFromDataSet should filter data when correct data passed', () => {
 
-  //     const req = httpMock.expectOne(`api/url?anything=1`, 'call to api');
-  //     expect(req.request.method).toBe('GET');
-  //     req.flush({
-  //       name: 'Amit'
-  //     });
-  //     httpMock.verify();
-  //   });
-  // });
+      const result = service.getDataFromDataSet(testData, 'shrtListId', 1);
 
-  // it('should be get call for getInterviewDetails', () => {
-  //   service.getInterviewDetails(1).subscribe((data: any) => {
+      expect(result[0].Title).toEqual('Java Eng');
+    });
 
-  //     const req = httpMock.expectOne(`api/url?anything=1`, 'call to api');
-  //     expect(req.request.method).toBe('GET');
-  //     req.flush({
-  //       name: 'Amit'
-  //     });
-  //     httpMock.verify();
-  //   });
-  // });
+    it('#getDataFromDataSet should filter data when wrong data passed', () => {
+
+      const result = service.getDataFromDataSet(testData, 'sds', 1);
+
+      expect(result.length).toBe(0);
+    });
 
 });
 
-// describe ('JobService (with spies)', () => {
-//   let httpClientSpy: { get: jasmine.Spy };
-//   let jobService: JobService;
-
-//   beforeEach(() => {
-//     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-//     jobService = new JobService(<any> httpClientSpy);
-//   });
-
-//   it('should return expected Jobs (HttpClient called once)', () => {
-//     const expectedJobs: any[] =
-//       [{ id: 1, name: 'A' }, { id: 2, name: 'B' }];
-
-//     httpClientSpy.get.and.returnValue(asyncData(expectedJobs));
-
-//     jobService.getAllJobs().subscribe(
-//       jobs => expect(jobs).toEqual(expectedJobs, 'expected jobs'),
-//       fail
-//     );
-//     expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
-//   });
-
-//   it('should return expected Jobs (HttpClient called once)', () => {
-//     const expectedJobs: any[] =
-//       [{ id: 1, name: 'A' }];
-
-//     httpClientSpy.get.and.returnValue(asyncData(expectedJobs));
-
-//     jobService.getJobs(1).subscribe(
-//       jobs => expect(jobs).toEqual(expectedJobs, 'expected jobs'),
-//       fail
-//     );
-//     expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
-//   });
-
-// });
