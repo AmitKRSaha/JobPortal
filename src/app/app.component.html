@@ -10,8 +10,11 @@
 
       <ul class="navbar-nav navbar-right">
           <li class="nav-item">
-              <a class="nav-link" style="cursor: pointer" *ngIf="loginService.user" (click)="logOut()">Hi {{loginService.user | uppercase}}</a>
+              <a class="nav-link" *ngIf="loginService.user">Hi {{loginService.user | uppercase}}</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link logout" style="cursor: pointer" *ngIf="loginService.user" (click)="logOut()">Log Out</a>
+        </li>
       </ul>
   </div>
 </nav>
