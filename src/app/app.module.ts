@@ -5,9 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
+import { ToastrModule } from 'ngx-toastr';
 
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { JobService } from './jobdata/job.service';
 
 import { AppComponent } from './app.component';
@@ -25,7 +25,8 @@ import { LoginService } from './login/login.service';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    ToastrModule.forRoot({positionClass: 'toast-bottom-right'})
   ],
   providers: [JobService, LoginService],
   bootstrap: [AppComponent]
