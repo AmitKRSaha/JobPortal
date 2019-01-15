@@ -1,4 +1,23 @@
 language: node_js
 node_js:
-  - "iojs"
   - "10"
+dist: trusty
+addons:
+  chrome: stable
+env:
+  global:
+    - CC_TEST_REPORTER_ID=537f3affe5d9f43eb097474cb6c311cbcc1a8517ecb1d0ff77e95ad391a4c9e9
+before_script:
+  - yarn global add nyc
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
+script:
+  - nyc --reporter=lcov yarn run test
+
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+notifications:
+  email: false
